@@ -1,0 +1,1867 @@
+--
+-- DAM-MIB.mib
+--
+  DAM-MIB DEFINITIONS ::= BEGIN
+
+    IMPORTS
+      OBJECT-TYPE
+        FROM RFC-1212
+      TRAP-TYPE
+        FROM RFC-1215
+      enterprises
+        FROM RFC1155-SMI
+      DisplayString
+        FROM RFC1213-MIB;
+
+--
+-- Node definitions
+--
+
+        panasonic OBJECT IDENTIFIER
+                ::= { enterprises 258 }
+
+        dataArchiver OBJECT IDENTIFIER
+                ::= { panasonic 120 }
+
+        dam OBJECT IDENTIFIER
+                ::= { dataArchiver 1000 }
+
+---
+---	linuxOSGeneral Group
+---				
+   linuxOSGeneral OBJECT IDENTIFIER ::= { dam 1 }	
+
+   cpu OBJECT IDENTIFIER ::= { linuxOSGeneral 1 }
+
+   contextSwitchesPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of context switches per second."
+      ::= { cpu 1 }
+
+   cpuSystemTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The time the CPU has spent running the kernel and its processes."
+      ::= { cpu 2 }
+	  
+   cpuIowaitTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Amount of time the CPU has been waiting for I/O to complete."
+      ::= { cpu 3 }
+	  
+   cpuNiceTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The time the CPU has spent running users' processes that have been niced."
+      ::= { cpu 4 }
+	  
+   cpuStealTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The amount of CPU 'stolen' from this virtual machine by the hypervisor for other tasks (such as running another virtual machine)."
+      ::= { cpu 5 }
+	  
+   cpuUserTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The time the CPU has spent running users' processes that are not niced."
+      ::= { cpu 6 }
+	  
+   cpuSoftirqTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The amount of time the CPU has been servicing software interrupts."
+      ::= { cpu 7 }
+	  
+   cpuIdleTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The time the CPU has spent doing nothing."
+      ::= { cpu 8 }
+	  
+   cpuInterruptTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The amount of time the CPU has been servicing hardware interrupts."
+      ::= { cpu 9 }
+	  
+   interruptsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of interrupts per second."
+      ::= { cpu 10 }
+	  
+   processorLoadOneMin OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The processor load is calculated as system CPU load divided by number of CPU cores."
+      ::= { cpu 11 }
+	  
+   processorLoadFiveMin OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The processor load is calculated as system CPU load divided by number of CPU cores."
+      ::= { cpu 12 }
+	  
+   processorLoadFifteenMin OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The processor load is calculated as system CPU load divided by number of CPU cores."
+      ::= { cpu 13 }
+	  
+   system OBJECT IDENTIFIER ::= { linuxOSGeneral 2 }
+ 
+   hostBootTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "When the system is powered on."
+      ::= { system 1 }
+
+   hostLocalTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Local time in the system."
+      ::= { system 2 }
+	  
+   hostName OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "System host name."
+      ::= { system 3 }
+	  
+   systemInformation OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The information as normally returned by 'uname -a'."
+      ::= { system 4 }
+	  
+   systemUptime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The time since the system is booting."
+      ::= { system 5 }
+	  
+   maximumNumberOfOpenedFiles OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf."
+      ::= { system 6 }
+	  
+   maximumNumberOfProcesses OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "It could be increased by using sysctrl utility or modifying file /etc/sysctl.conf."
+      ::= { system 7 }
+
+   security OBJECT IDENTIFIER ::= { linuxOSGeneral 3 }
+ 
+   numberOfLoggedInUsers OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Number of users who are currently logged in."
+      ::= { security 1 }
+	  
+   checksumPasswd OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Checksum of /etc/passwd."
+      ::= { security 2 }
+	
+   memory OBJECT IDENTIFIER ::= { linuxOSGeneral 4 }
+   
+   availableMemory OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Available memory is defined as free+cached+buffers memory."
+      ::= { memory 1 }
+	  
+   freeSwapSpace OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { memory 2 }
+	  
+   freeSwapSpaceInPercentage OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { memory 3 }
+	  
+   totalMemory OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { memory 4 }
+	  
+   totalSwapSpace OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { memory 5 }
+
+   processes OBJECT IDENTIFIER ::= { linuxOSGeneral 5 }
+
+   numberOfProcesses OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { processes 1 }
+	  
+   numberOfRunningProcesses OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { processes 2 }
+	  
+   filesystems OBJECT IDENTIFIER ::= { linuxOSGeneral 6 }
+
+   freeDiskSpaceOnTotalSpace OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { filesystems 1 }
+	  
+   freeDiskSpaceOnTotalSpacePercentage OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { filesystems 2 }
+	  
+   freeInodesOnTotalIndes OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { filesystems 3 }
+	  
+   totalDiskSpace OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { filesystems 4 }
+	  
+   usedDiskSpace OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { filesystems 5 }
+	  
+   networkInterfaces OBJECT IDENTIFIER ::= { linuxOSGeneral 7 }
+
+   incomingNetworkTraffic OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { networkInterfaces 1 }
+	  
+   outgoingNetworkTraffic OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { networkInterfaces 2 }
+												
+---
+---	mySql Group
+---
+   mySql OBJECT IDENTIFIER ::= { dam 2 }
+   
+   standard OBJECT IDENTIFIER ::= { mySql 1 }
+
+   beginOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times begin statement has been executed."
+      ::= { standard 1 }
+	  
+   beginOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times begin statement has been executed."
+      ::= { standard 2 }
+   
+   bytesSentPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of bytes sent to all clients."
+      ::= { standard 3 }
+	  
+   commitOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times commit statement has been executed."
+      ::= { standard 4 }
+	  
+   deleteOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times delete statement has been executed."
+      ::= { standard 5 }
+	  
+   insertOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times insert statement has been executed."
+      ::= { standard 6 }
+	  
+   queriesPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of statements executed by the server."
+      ::= { standard 7 }
+
+   rollbackOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times rollback statement has been executed."
+      ::= { standard 8 }
+  
+   selectOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times select statement has been executed."
+      ::= { standard 9 }
+
+   slowQueries OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of queries that have taken more than long_query_time seconds. "
+      ::= { standard 10 }
+	  
+   status OBJECT-TYPE
+      SYNTAX INTEGER
+	    {
+        mySQL-server-down(0),
+        mySQL-server-up(1)
+        }
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "mysql_ping:Checks whether the connection to the server is working."
+      ::= { standard 11 }
+	  
+   updateOperationsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times update statement has been executed."
+      ::= { standard 12 }
+	  
+   uptime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of seconds that the server has been up."
+      ::= { standard 13 }
+	  
+   version OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "MySql version."
+      ::= { standard 14 }
+	  
+   tableLocksWaited OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times that a request for a table lock could not be granted immediately and a wait was needed."
+      ::= { standard 15 }
+	  
+   innodbBufferPoolPagesTotal OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The total size of the InnoDB buffer pool, in pages."
+      ::= { standard 16 }
+	  
+   innodbLogWaits OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times that the log buffer was too small and a wait was required for it to be flushed before continuing."
+      ::= { standard 17 }
+	  
+   innodbRowLockTime OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times operations on InnoDB tables had to wait for a row lock."
+      ::= { standard 18 }
+	  
+   innodbRowLockTimeAverage OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The average time to acquire a row lock for InnoDB tables, in milliseconds."
+      ::= { standard 19 }
+	  
+   innodbRowLockTimeMax OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The maximum time to acquire a row lock for InnoDB tables, in milliseconds."
+      ::= { standard 20 }
+
+   questionsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of statements executed by the server."
+      ::= { standard 21 }
+	  
+   transactionsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "."
+      ::= { standard 22 }
+	  
+   tableScanRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'handlerReadRndNext'/ 'comSelect'*100."
+      ::= { standard 23 }
+
+   innodbBuffer OBJECT IDENTIFIER ::= { mySql 2 }
+   
+   innodbBufferPoolPagesData OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of pages in the InnoDB buffer pool containing data."
+      ::= { innodbBuffer 1 }
+	  
+   innodbLogFileSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The size in bytes of each log file in a log group."
+      ::= { innodbBuffer 2 }
+	  
+   innodbLogBufferSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The size in bytes of the buffer that InnoDB uses to write to the log files on disk."
+      ::= { innodbBuffer 3 }
+
+   innodbCache OBJECT IDENTIFIER ::= { mySql 3 }
+
+   innodbTableOpenCache OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of open tables for all threads. Increasing this value increases the number of file descriptors that mysqld requires."
+      ::= { innodbCache 1 }
+
+   openTables OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of tables that are open."
+      ::= { innodbCache 2 }
+	  
+   openTablesRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'open_tables'/('open_tables'+'opened_tables')*100."
+      ::= { innodbCache 3 }
+	  
+   tableOpenCacheUsedRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'open_tables'/('open_tables'+'table_open_cache')*100."
+      ::= { innodbCache 4 }
+	  
+   threadsCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "How many threads the server should cache for reuse."
+      ::= { innodbCache 5 }
+	  
+   threadsCached OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of threads in the thread cache."
+      ::= { innodbCache 6 }
+	  
+   threadsConnected OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of currently open connections."
+      ::= { innodbCache 7 }
+	  
+   threadsCreated OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of threads created to handle connections."
+      ::= { innodbCache 8 }
+	  
+   threadsRunning OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of threads that are not sleeping."
+      ::= { innodbCache 9 }
+	  
+   innodbQueryCache OBJECT IDENTIFIER ::= { mySql 4 }
+   
+   qcacheFreeBlocks OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of free memory blocks in the query cache."
+      ::= { innodbQueryCache 1 }
+	  
+   qcacheFreeMemory OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The amount of free memory for the query cache."
+      ::= { innodbQueryCache 2 }
+	  
+   qcacheHits OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of query cache hits."
+      ::= { innodbQueryCache 3 }
+	  
+   qcacheInserts OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of queries added to the query cache."
+      ::= { innodbQueryCache 4 }
+	  
+   qcacheLowmenPrunes OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of queries that were deleted from the query cache because of low memory."
+      ::= { innodbQueryCache 5 }
+	  
+   qcacheNotCached OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of noncached queries (not cacheable, or not cached due to the query_cache_type setting)."
+      ::= { innodbQueryCache 6 }
+	  
+   qcacheQueriesInCache OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of queries registered in the query cache."
+      ::= { innodbQueryCache 7 }
+	  
+   qcacheTotalBlocks OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The total number of blocks in the query cache."
+      ::= { innodbQueryCache 8 }
+	  
+   qcacheFragmentRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'Qcache_free_blocks'/'Qcache_total_blocks'*100."
+      ::= { innodbQueryCache 9 }
+	  
+   qcacheUsedRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "('query_cache_size'-'Qcache_free_memory')/'query_cache_size'*100."
+      ::= { innodbQueryCache 10 }
+	  
+   qcacheHitsRate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'Qcache_hits'/�i'Qcache_hits'+'Qcache_inserts'�j*100."
+      ::= { innodbQueryCache 11 }
+	  
+   queryCacheLimit OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The default value is 1MB."
+      ::= { innodbQueryCache 12 }
+	  
+   queryCacheMinResUnit OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The minimum size (in bytes) for blocks allocated by the query cache."
+      ::= { innodbQueryCache 13 }
+	  
+   queryCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The amount of memory allocated for caching query results."
+      ::= { innodbQueryCache 14 }
+	  
+   innodbLock OBJECT IDENTIFIER ::= { mySql 5 }
+
+   tableLocksImmediate OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times that a request for a table lock could be granted immediately."
+      ::= { innodbLock 1 }
+	  
+   tableLocksWaited OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of times that a request for a table lock could not be granted immediately and a wait was needed."
+      ::= { innodbLock 2 }
+	  
+   engineSelect OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "'Table_locks_immediate'/'table_locks_waited'*100."
+      ::= { innodbLock 3 }
+	  
+   masterSlave OBJECT IDENTIFIER ::= { mySql 6 }
+   
+   slaveStaus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "This statement provides status information on essential parameters of the slave threads."
+      ::= { masterSlave 1 }
+	  
+---
+---	sqlite Group
+---
+   sqlite OBJECT IDENTIFIER ::= { dam 3 }
+   
+   sqliteFileExistence OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { sqlite 1 }
+	  
+   sqliteFileSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { sqlite 2 }
+	  
+---
+---	storage Group
+---
+   storage OBJECT IDENTIFIER ::= { dam 4 }
+   
+   hardwareState OBJECT IDENTIFIER ::= { storage 1 }
+
+   hardwareTemperature OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Hardware operating Temperature(Celsius)."
+      ::= { hardwareState 1 }
+	  
+   hardwareMalfunction OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Hardware failure Status."
+      ::= { hardwareState 2 }
+
+   performance OBJECT IDENTIFIER ::= { storage 2 }
+   
+   readMergePerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of read requests merged per second that were queued to the device."
+      ::= { performance 1 }
+	  
+   writeMergePerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of write requests merged per second that were queued to the device."
+      ::= { performance 2 }
+	  
+   readIOPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of read requests that were issued to the device per second."
+      ::= { performance 3 }
+	  
+   WriteIOPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of write requests that were issued to the device per second."
+      ::= { performance 4 }
+	  
+   readingTheNumberOfSectorsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of sectors read from the device per second."
+      ::= { performance 5 }
+	  
+   writeingTheNumberOfSectorsPerSecond OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "The number of sectors written to the device per second."
+      ::= { performance 6 }
+	  
+---
+---	networkService Group
+---
+   networkService OBJECT IDENTIFIER ::= { dam 5 }
+   
+   sambaService OBJECT IDENTIFIER ::= { networkService 1 }
+   
+   sambaServiceStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Samba Service working status(0:Abnormal;1:Normal)."
+      ::= { sambaService 1 }
+	  
+   sambaPortAliveStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "0: Abnormal;1: Normal."
+      ::= { sambaService 2 }
+	  
+   sambaProcessStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "0: without; 1: Uninterruptible sleep; 2: Running or runnable; 3: Interruptible sleep; 4: Stopped; 5: dead; 6: Defunct ('zombie') process."
+      ::= { sambaService 3 }
+	  
+   sambaProcessConsumesMemory OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { sambaService 4 }
+	  
+   sambaProcessConsumesCpuUsage OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { sambaService 5 }
+	  
+   apacheService OBJECT IDENTIFIER ::= { networkService 2 }
+   
+   apacheServiceStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "Apache Service working status(0:Abnormal;1:Normal)."
+      ::= { apacheService 1 }
+	  
+   apachePortAliveStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "0: Abnormal;1: Normal."
+      ::= { apacheService 2 }
+	  
+   apacheProcessStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        "0: without; 1: Uninterruptible sleep; 2: Running or runnable; 3: Interruptible sleep; 4: Stopped; 5: dead; 6: Defunct ('zombie') process."
+      ::= { apacheService 3 }
+	  
+   apacheProcessConsumesMemory OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { apacheService 4 }
+	  
+   sambaProcessConsumesCpuUsage OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { apacheService 5 }
+
+
+
+
+
+
+
+
+
+
+
+
+---
+---     damData Group
+---
+      damData OBJECT IDENTIFIER ::= { dam 6 }
+
+      daUnit   OBJECT IDENTIFIER ::= { damData 2 }
+
+      Magazine OBJECT IDENTIFIER ::= { damData 3 }
+
+      Project  OBJECT IDENTIFIER ::= { damData 4 }
+
+      Container OBJECT IDENTIFIER ::= { damData 5 }
+
+      Cache OBJECT IDENTIFIER ::= { damData 6 }
+
+      Volume  OBJECT IDENTIFIER ::= { damData 7 }
+
+      volumecount OBJECT IDENTIFIER ::= { Volume 4 }
+
+      Swift OBJECT IDENTIFIER ::= { damData 8 }
+
+      DistributionofCRUDOprationsovertime ::= { Swift 4 }
+
+      Service ::= { damData 9 }
+
+      ErrorMail ::= { damData 10 }
+
+      Domain ::= { damData 11 }
+     
+      Port ::= { damData 12 }
+
+      damcomponent ::= { damData 13 }
+     
+      Version ::= { damData 14 }
+       
+     Cluster ::= { damData 15 }
+
+     UpdateTimeStamp ::= { damData 16 }
+
+
+
+
+
+
+---DACount===>daListTable
+
+   DACount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daUnit 1 }
+
+---
+---     daListTable Table
+---
+
+   daListTable OBJECT-TYPE
+      SYNTAX SEQUENCE OF DAListEntry
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Table of all DAList."
+      ::= { damData 2 }
+
+   daListEntry OBJECT-TYPE
+      SYNTAX DAListEntry
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Entry in the DAList."
+      INDEX { daNo }
+      ::= { daListTable 2 }
+
+   daListEntry ::=
+      SEQUENCE {
+        daNo
+          INTEGER,
+        serialNo
+          DisplayString,
+        daName
+          DisplayString,
+        driveId
+         INTEGER
+       }
+
+   daNo OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daListEntry 1 }
+
+   serialNo OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daListEntry 2 }
+
+   daName OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daListEntry 3 }
+
+   driveId OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daListEntry 4 }
+
+----------------------------------------
+   DAUnitStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daUnit 3 }
+
+
+   DAStatusinDB OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daUnit 4 }
+
+
+   DriveCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daUnit 5 }
+
+
+
+
+   DriveLoadCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { daUnit 6 }
+
+
+
+     UnavaiableMagazineCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Magazine 1 }
+
+
+
+      OutofManagementMagazineCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Magazine 2 }
+
+
+
+
+
+      OverthanSpecifiedLastSessionMagazineCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Magazine 3 }
+
+
+
+      UnallocatedMagazineCountSystem OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Magazine 4 }
+
+
+      RecordedMagazine OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Magazine 5 }
+
+
+
+  ProjectListTable OBJECT-TYPE
+      SYNTAX SEQUENCE OF DAListEntry
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Table of all DAList."
+      ::= {  damData 4 }
+
+   ProjectList OBJECT-TYPE
+      SYNTAX DAProjectList
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Entry in the DAList."
+      INDEX { projectId }
+      ::= { ProjectListTable 1 }
+
+   ProjectList ::=
+      SEQUENCE {
+        projectId
+          DisplayString,
+        name
+          DisplayString,
+        ProjectMode
+          INTEGER,
+        containerName
+         DisplayString
+
+       }
+
+   projectId OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { ProjectList 1 }
+
+
+   name OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { ProjectList 2 }
+
+
+   ProjectMode OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { ProjectList 3 }
+
+    containerName OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { ProjectList 4 }
+
+
+---ContainerCount==>ProjectListTable
+
+    ContainerCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 2 }
+
+---UnusedMagazineCount==>ProjectListTable
+
+    UnusedMagazineCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 3 }
+
+
+    ProjectCountShare OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 4 }
+
+
+
+    ObjectCountShare OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 5 }
+
+
+    DataGrowthShare OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 6 }
+
+
+    FreeSpaceShare OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Project 7 }
+
+
+     ObjectCountAlone OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Container 1 }
+
+
+
+     DataGrowthAlone OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Container 2 }
+
+     FreeSpaceAlone OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Container 3 }
+
+
+
+     UnsynchronizedCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Cache 1 }
+
+
+     UnexpiredCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Cache 2 }
+
+
+  ProtectedCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Cache 3 }
+
+
+  CacheDeviceSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Cache 4 }
+
+  CacheDeviceSizeUsable OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Cache 5 }
+
+     MountingVolumeCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Volume 1 }
+
+
+
+    ProjectId OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   volumecount 1 }
+
+
+
+  VolumeCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   volumecount 2 }
+
+
+---
+---     VolumeList Table
+---
+
+    VolumeListTable OBJECT-TYPE
+      SYNTAX SEQUENCE OF DAListEntry
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Table of all DAList."
+      ::= { damData 7 }
+
+     VolumeList OBJECT-TYPE
+      SYNTAX DAListEntry
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Entry in the DAList."
+      INDEX { projectId }
+      ::= { VolumeListTable 2 }
+
+     VolumeList ::=
+      SEQUENCE {
+        volumeId
+          INTEGER,
+        projectId
+          DisplayString,
+        containerName
+          DisplayString,
+        volumeName
+         DisplayString
+        volumeCacheSize
+         INTEGER
+      }
+
+     volumeId OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { VolumeList 1 }
+
+
+     projectId OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { VolumeList 2 }
+
+     containerName OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { VolumeList 3 }
+
+     volumeName OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { VolumeList 4 }
+
+     volumeCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { VolumeList 5 }
+
+
+--- driveLoadCount ==> VolumeList Table
+
+
+     DirtyCacheSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Volume 3 }
+
+     S3QLCacheDeviceSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Volume 5 }
+
+     S3QLCacheDeviceSizeUsable OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Volume 6 }
+
+----------------------------------------------
+   swiftCacheDeviceSize OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Swift 1 }
+
+   ReadIOPS OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Swift 2 }
+
+    WriteIOPS OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Swift 3 }
+
+
+   Put OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   DistributionofCRUDOprationsovertime 1 }
+
+
+   Get OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   DistributionofCRUDOprationsovertime 2 }
+
+
+   Delete OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   DistributionofCRUDOprationsovertime 3 }
+
+
+
+   Post OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   DistributionofCRUDOprationsovertime 4 }
+
+---
+---  Distribution of HTTP Response over time List Table
+---
+
+    DistributionofHTTPResponseovertimeListTable OBJECT-TYPE
+      SYNTAX SEQUENCE OF DistributionofHTTPResponseovertimeListTable
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Table of all DAList."
+      ::= {  Swift 5 }
+
+   swiftCacheDeviceSizeUsable OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Swift 6 }
+
+    PutGetDeletelist OBJECT-TYPE
+      SYNTAX DistributionofHTTPResponseovertimeListTable
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Entry in the DAList."
+      INDEX { put }
+      ::= { DistributionofHTTPResponseovertimeListTable 1 }
+
+    PutGetDeletelist ::=
+      SEQUENCE {
+        putlist
+          DisplayString,
+        getlist
+          DisplayString,
+        deletelist
+          DisplayString
+        postlist
+          DisplayString       }
+
+   putlist OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelist 1 }
+
+
+   getlist OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelist 2 }
+
+
+
+   deletelist OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelist 3 }
+
+
+   postlist OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelist 4 }
+
+
+---PutGetDeletelistvalue==>Distribution of HTTP Response over time List Table
+
+
+    DistributionofHTTPResponseovertimeListvalueTable OBJECT-TYPE
+      SYNTAX SEQUENCE OF DistributionofHTTPResponseovertimeListTable
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Table of all DAList."
+      ::= {  Swift 5 }
+
+
+    PutGetDeletelistvalue OBJECT-TYPE
+      SYNTAX DistributionofHTTPResponseovertimeListTable
+      ACCESS not-accessible
+      STATUS mandatory
+      DESCRIPTION
+        "Entry in the DAList."
+      INDEX { put }
+      ::= { DistributionofHTTPResponseovertimeListvalueTable 2 }
+
+    PutGetDeletelistvalue ::=
+      SEQUENCE {
+        putlistvalue
+          INTEGER,
+        getlistvalue
+          INTEGER,
+        deletelistvalue
+          INTEGER
+        postlistvalue
+          INTEGER       }
+
+   putlistvalue OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelistvalue 1 }
+
+
+   getlistvalue OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelistvalue 2 }
+
+
+   deletelistvalue OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelistvalue 3 }
+
+	  
+   postlistvalue OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { PutGetDeletelistvalue 4 }
+	  
+----------------------------------------------------------------
+
+   DAMComponent OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Service 1 }
+
+
+     ServiceStatus OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Service 2 }
+
+
+     ServiceAlive OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Service 3 }
+
+
+	  DaMail OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  ErrorMail 1 }
+
+     L3Mail OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  ErrorMail 2 }
+
+     DomainCount OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Domain 1 }
+
+     DomainList OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= { Domain 2 }
+
+     DomainProjectId OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Domain 3 }
+
+     PortComponent OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Port 1 }
+
+
+      PortStatus OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Port 2 }
+
+
+      PortAlive OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {  Port 3 }
+
+
+      Component OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   damcomponent 1 }
+
+
+      DamVersion OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   Version 1 }
+
+
+
+      PatchVersion OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   Version 2 }
+
+
+      ClusterStatus OBJECT-TYPE
+      SYNTAX INTEGER
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   Cluster 1 }
+
+      ClusterNode OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   Cluster 2 }
+
+      LastUpdateTimeStamp OBJECT-TYPE
+      SYNTAX DisplayString
+      ACCESS read-only
+      STATUS mandatory
+      DESCRIPTION
+        ""
+      ::= {   UpdateTimeStamp 1 }
+
+
+END

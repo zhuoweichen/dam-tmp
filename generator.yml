@@ -1,0 +1,23 @@
+modules:
+  DAM-MIB:
+    walk:
+      - DACount
+      - daListEntry
+      - DAUnitStatus
+      - DAStatusinDB
+      - DriveCount
+      - DriveLoadCount 
+      - Magazine
+      - ProjectList
+      - ContainerCount
+      - UnusedMagazineCount
+      - ObjectCountAlone
+      - DataGrowthAlone
+      - FreeSpaceAlone
+      - Cache
+      - Volume
+      - Swift
+      - Service
+      - Version 
+    auth:
+      community: da-public
